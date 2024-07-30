@@ -1,0 +1,110 @@
+﻿@model vmHome
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <!-- Apartments Section -->
+    <section id="apartments">
+        <h3>Apartments</h3>
+        <div class="scrollable-section">
+            <div class="row">
+                @foreach (var item in Model.vmApartments)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-secondary text-white">
+                                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                                <span class="badge bg-success rounded-pill custom-badge" data-bs-toggle="tooltip" title="Occupied">@Html.DisplayFor(modelItem => item.NumberOfFlats)</span>
+                                <span class="badge bg-danger rounded-pill custom-badge" data-bs-toggle="tooltip" title="Vacant">@Html.DisplayFor(modelItem => item.NumberOfFlats)</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text"><strong>Address:</strong> @Html.DisplayFor(modelItem => item.Address)</p>
+                                <p class="card-text"><strong>Association Email:</strong> @Html.DisplayFor(modelItem => item.AssociationGroupEmail)</p>
+                            </div>
+                            <div class="card-footer bg-light text-center">
+                                <partial name="_ActionLinks" model="@item.ID" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <a asp-action="Create" class="btn btn-success mt-4">Create New</a>
+    </section>
+
+    <!-- Flats Section -->
+    <section id="flats">
+        <h3>Flats</h3>
+        <div class="scrollable-section">
+            @foreach (var item in Model.vmFlats)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        </div>
+                        <div class="card-body">
+                            @* <p class="card-text"><strong>Apartment:</strong> @Html.DisplayFor(modelItem => item.ApartmentTitle)</p> *@
+                            <p class="card-text text-white"><strong>Description:</strong> @Html.DisplayFor(modelItem => item.Description)</p>
+                            <p class="card-text text-white"><strong>Area:</strong> @Html.DisplayFor(modelItem => item.Area)</p>
+                            <p class="card-text text-white">
+                                <strong>Status:</strong>
+                                <span class="badge @(item.IsVacant ? "badge-success-custom" : "badge-danger-custom")">
+                                    @(item.IsVacant ? "Vacant" : "Occupied")
+                                </span>
+                            </p>
+                        </div>
+                        <div class="card-footer bg-light text-center">
+                            <partial name="_ActionLinks" model="@item.ID" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <a asp-action="Create" class="btn btn-success mt-4">Create New Flat</a>
+    </section>
+
+    <!-- Residents Section -->
+    <section id="residents">
+        <h3>Residents</h3>
+        <div class="scrollable-section">
+            @foreach (var item in Model.vmResidents)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-secondary text-white">
+                            <h3 class="card-title">@Html.DisplayFor(modelItem => item.FullName)</h3>
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.FlatTitle)</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><strong>Current Address:</strong> @Html.DisplayFor(modelItem => item.CurrentAddress)</p>
+                            <p class="card-text"><strong>Email:</strong> @Html.DisplayFor(modelItem => item.Email)</p>
+                            <p class="card-text"><strong>Phone1:</strong> @Html.DisplayFor(modelItem => item.Phone1)</p>
+                            <p class="card-text"><strong>Entry Date:</strong> @Html.DisplayFor(modelItem => item.EntryDate)</p>
+                            <p class="card-text">
+                                <strong>Status:</strong>
+                                <span class="badge @(item.IsOwner ? "badge-success-custom" : "badge-danger-custom")">
+                                    @(item.IsOwner ? "Owner" : "Tenant")
+                                </span>
+                            </p>
+                            <p class="card-text">
+                                <strong>Maintenance Payee:</strong>
+                                <span class="badge @(item.MaintenancePayee ? "badge-success-custom" : "badge-danger-custom")">
+                                    @(item.MaintenancePayee ? "Yes" : "No")
+                                </span>
+                            </p>
+                        </div>
+                        <div class="card-footer bg-light text-center">
+                            <partial name="_ActionLinks" model="@item.ID" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <a asp-action="Create" class="btn btn-success mt-4">Create New Resident</a>
+    </section>
+
+
+</div>

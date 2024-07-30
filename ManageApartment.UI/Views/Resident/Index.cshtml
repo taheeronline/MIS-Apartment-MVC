@@ -1,0 +1,46 @@
+﻿@model IEnumerable<vmResident>
+
+@{
+    ViewData["Title"] = "Resident(s)";
+}
+
+<h2>Resident(s)</h2>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <h3 class="card-title">@Html.DisplayFor(modelItem => item.FullName)</h3>
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.FlatTitle)</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Current Address:</strong> @Html.DisplayFor(modelItem => item.CurrentAddress)</p>
+                        <p class="card-text"><strong>Email:</strong> @Html.DisplayFor(modelItem => item.Email)</p>
+                        <p class="card-text"><strong>Phone1:</strong> @Html.DisplayFor(modelItem => item.Phone1)</p>
+                        <p class="card-text"><strong>Entry Date:</strong> @Html.DisplayFor(modelItem => item.EntryDate)</p>
+                        <p class="card-text">
+                            <strong>Status:</strong>
+                            <span class="badge @(item.IsOwner ? "badge-success-custom" : "badge-danger-custom")">
+                                @(item.IsOwner ? "Owner" : "Tenant")
+                            </span>
+                        </p>
+                        <p class="card-text">
+                            <strong>Maintenance Payee:</strong>
+                            <span class="badge @(item.MaintenancePayee ? "badge-success-custom" : "badge-danger-custom")">
+                                @(item.MaintenancePayee ? "Yes" : "No")
+                            </span>
+                        </p>
+                    </div>
+                    <div class="card-footer bg-light text-center">
+                        <partial name="_ActionLinks" model="@item.ID" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<a asp-action="Create" class="btn btn-success mt-4">Create New</a>

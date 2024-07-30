@@ -1,0 +1,63 @@
+﻿@model Apartment
+
+@{
+    ViewData["Title"] = "Create Apartment";
+}
+
+<h2>Create Apartment</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GpsLocation" class="control-label"></label>
+                <input asp-for="GpsLocation" class="form-control" />
+                <span asp-validation-for="GpsLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResidentGroupEmail" class="control-label"></label>
+                <input asp-for="ResidentGroupEmail" class="form-control" />
+                <span asp-validation-for="ResidentGroupEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AssociationGroupEmail" class="control-label"></label>
+                <input asp-for="AssociationGroupEmail" class="form-control" />
+                <span asp-validation-for="AssociationGroupEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone1" class="control-label"></label>
+                <input asp-for="Phone1" class="form-control" />
+                <span asp-validation-for="Phone1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone2" class="control-label"></label>
+                <input asp-for="Phone2" class="form-control" />
+                <span asp-validation-for="Phone2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

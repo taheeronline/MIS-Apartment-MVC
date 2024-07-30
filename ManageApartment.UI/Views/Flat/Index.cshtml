@@ -1,0 +1,55 @@
+﻿@model IEnumerable<vmFlat>
+
+@{
+    ViewData["Title"] = "Flat(s)";
+}
+
+<h2 class="text-white fw-bold">Flat(s) 
+    @if (ViewBag.SelectedApartmentName != null)
+    {
+        <span>from @ViewBag.SelectedApartmentName</span>
+    }
+</h2>
+
+<div class="mb-4">
+    <form asp-action="FilterFlats" method="post">
+        <div class="form-group d-flex align-items-center">
+            <label for="ApartmentId" class="mr-3 text-white fw-bold">Select Apartment:&nbsp;&nbsp;</label>
+            <select id="ApartmentId" name="apartmentId" class="form-control form-control-sm mr-5" style="width: 200px;" asp-items="ViewBag.ApartmentList"></select>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" class="btn btn-primary btn-sm">Filter Flats</button>
+        </div>
+    </form>
+</div>
+
+<hr />
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                    </div>
+                    <div class="card-body">
+                        @* <p class="card-text"><strong>Apartment:</strong> @Html.DisplayFor(modelItem => item.ApartmentTitle)</p> *@
+                        <p class="card-text text-white"><strong>Description:</strong> @Html.DisplayFor(modelItem => item.Description)</p>
+                        <p class="card-text text-white"><strong>Area:</strong> @Html.DisplayFor(modelItem => item.Area)</p>
+                        <p class="card-text text-white">
+                            <strong>Status:</strong>
+                            <span class="badge @(item.IsVacant ? "badge-success-custom" : "badge-danger-custom")">
+                                @(item.IsVacant ? "Vacant" : "Occupied")
+                            </span>
+                        </p>
+                    </div>
+                    <div class="card-footer bg-light text-center">
+                        <partial name="_ActionLinks" model="@item.ID" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<a asp-action="Create" class="btn btn-success mt-4">Create New</a>

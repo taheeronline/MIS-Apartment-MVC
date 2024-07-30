@@ -1,0 +1,42 @@
+﻿@model IEnumerable<vmApartment>
+
+@{
+    ViewData["Title"] = "Apartment(s)";
+}
+
+<h2>Apartment(s)</h2>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        <span class="badge bg-success rounded-pill custom-badge" data-bs-toggle="tooltip" title="Occupied">@Html.DisplayFor(modelItem => item.NumberOfFlats)</span>
+                        <span class="badge bg-danger rounded-pill custom-badge" data-bs-toggle="tooltip" title="Vacant">@Html.DisplayFor(modelItem => item.NumberOfFlats)</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Address:</strong> @Html.DisplayFor(modelItem => item.Address)</p>
+                        <p class="card-text">
+                            <strong>GPS Location:</strong>
+                            <a href="https://www.google.com/maps/search/?api=1&query=@item.GpsLocation" target="_blank">
+                                @Html.DisplayFor(modelItem => item.GpsLocation)
+                            </a>
+                        </p>
+                        <p class="card-text"><strong>Resident Email:</strong> @Html.DisplayFor(modelItem => item.ResidentGroupEmail)</p>
+                        <p class="card-text"><strong>Association Email:</strong> @Html.DisplayFor(modelItem => item.AssociationGroupEmail)</p>
+                        <p class="card-text"><strong>Phone 1:</strong> @Html.DisplayFor(modelItem => item.Phone1)</p>
+                        <p class="card-text"><strong>Phone 2:</strong> @Html.DisplayFor(modelItem => item.Phone2)</p>
+                    </div>
+                    <div class="card-footer bg-light text-center">
+                        <partial name="_ActionLinks" model="@item.ID" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<a asp-action="Create" class="btn btn-success mt-4">Create New</a>

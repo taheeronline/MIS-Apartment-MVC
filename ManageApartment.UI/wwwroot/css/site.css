@@ -1,0 +1,58 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.badge-success-custom {
+    background-color: #28a745;
+    color: white; /* Ensure text is white */
+}
+
+.badge-danger-custom {
+    background-color: #dc3545;
+    color: white; /* Ensure text is white */
+}
+
+.custom-badge {
+    font-size: 1.5rem; /* Adjust this value to make the text larger */
+    padding: 0.5em 1em; /* Adjust padding for better appearance */
+}
+
+.scrollable-section {
+    max-height: 500px; /* Adjust the height as needed */
+    overflow-y: auto;
+    padding-right: 15px; /* Space for scrollbar */
+}
+
+    .scrollable-section::-webkit-scrollbar {
+        width: 12px; /* Customize the scrollbar width */
+    }
+
+    .scrollable-section::-webkit-scrollbar-thumb {
+        background: #888; /* Customize the scrollbar thumb color */
+        border-radius: 10px;
+    }
+
+        .scrollable-section::-webkit-scrollbar-thumb:hover {
+            background: #555; /* Darken on hover */
+        }
+
+

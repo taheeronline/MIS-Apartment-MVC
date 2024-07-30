@@ -1,0 +1,42 @@
+﻿@inject IHttpContextAccessor ContextAccessor
+
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">MIS-Apartment</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                @if (ContextAccessor.HttpContext.Session.GetInt32("UserId") != null)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Apartment" asp-action="Index">Apartment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Flat" asp-action="Index">Flat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Resident" asp-action="Index">Resident</a>
+                    </li>
+                }
+            </ul>
+
+            @if (ContextAccessor.HttpContext.Session.GetInt32("UserId") != null)
+            {
+                <div class="d-flex">
+                    <label>@(ContextAccessor.HttpContext.Session.GetString("UserName") + " ")</label>&nbsp;
+                    <a asp-action="Logout" asp-controller="User">Logout</a>&nbsp;&nbsp;
+                </div>
+            }
+
+            <form class="d-flex">
+                <input class="form-control me-sm-2" type="search" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
